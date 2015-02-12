@@ -330,3 +330,28 @@ Another example. Suppose we want to get aggregate size of all the files in a dir
 # We know that the first field of ls -l contains the size of the file
 $ ls -l | awk '{sum += $5} END {print sum}'
 ```
+
+####Sort
+Simply enough, this sorts a file or input. The real power in sort lies in it's options. It's used like this;
+
+```
+$ sort -<options> <inputfile>
+```
+
+Several important options include `-r` which sorts by reverse order
+
+```
+$ sort -r myfile.txt
+```
+
+And `-f` which ignores case when sorting. 
+
+```
+$ sort -f myfile.txt
+```
+
+Note that by default `sort` sorts by alphabetical value. So if you have a collection of numbers it sorts them by they're alphabetical values rather than their numeric values. So 31 would come after 300 for example. We solve this problem with the `-n` option
+
+```
+$ sort -n numbers.txt
+```
