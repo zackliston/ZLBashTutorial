@@ -1,12 +1,13 @@
 # ZLBashExample
 
 ##Creating Bash Scripts
-**Create a file using your favorite text editor**
+First, create a file using your favorite text editor
 ```
 vim testscript
 ```
 
-**There are two conventions, that although not necessarily required, should be followed**
+######Skeleton Script
+There are two conventions, that although not necessarily required, should be followed<br>
 ```bash
 # You must tell the thing running the script where to find the bash interpreter 
 # Usually /usr/bin/bash works fine, but in the case that bash is not in the /usr/bin directory
@@ -19,4 +20,11 @@ vim testscript
 # Return 0 for success, or any other number up to 255 for failure
 return 0
 
+```
+
+######Permissions
+Now we have a bash file, but we can't run it yet (you can try if you want using ./testscript but you'll get a permission denied error). This is because the file does not have the execute permission set. We can allow execution of this file by the user in this way:
+
+```
+chmod u+x testscript
 ```
