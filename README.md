@@ -201,19 +201,47 @@ $ script param1 param2 param3 param4
 # $# is the number of parameters, in this case 4
 ```
 
-###File descriptors/redirection
+###File descriptors - Input/Output
 ####File Descriptors
 Bash has three open file descriptors by default
 * Standard Input - File Descriptor 0
 * Standard Output - File Descriptor 1
 * Standard Error - File Descriptor 2
 
-######Standard Input
+######Standard Input - stdin
 By default is connected to the keyboard.
 
-######Standard Output
+######Standard Output - stdout
 By default is connected to the screen. This is the actual result of a program
 
-######Standard Error
+######Standard Error - stderr
 By default is connected to the screen. This includes all messages, not just errors. 
 
+####Redirection
+Redirection is one of the most useful tools in bash. It allows us to get/put information from anywhere to anywhere. For example if I wanted to see all the files in the current directory I could do this:
+
+```
+$ ls
+```
+
+And since stdin is by default set to the screen, then we see the result. However, if we want to write the result to a file we can do it as simple as this
+
+```
+$ ls > files.txt
+```
+
+If you open `files.txt` you'll see the all the files in the directory.<br>
+Now if we want to also send `stderr` to `files.txt` we can easily do that
+
+```
+$ ls > files.txt 2>&1
+```
+
+We can reference the file descriptors by their numbers. Remember that `stdout` is 1 and `stderr` is 2. The syntax above is saying `send stdout to the same place stdin is going`. 
+<br>
+Note that the `>` creates a new file or overwrites the existing one. If we want to append instead we can use this
+
+```
+$ ls >> files.txt
+# appends the output to files.txt instead of replacing it. 
+```
