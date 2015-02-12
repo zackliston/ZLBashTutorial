@@ -128,3 +128,26 @@ That doesn't seem right, Hello World should be one the same line - or should it.
 $ print "Hello World"
 Hello World
 ```
+
+**On space charaters and double quotes**
+It is generally advised to use double quotes very liberally. They will help us avoid common problems with parameter separation and expansion.
+
+###If, while, for
+####If-then-else 
+```bash
+#!/usr/bin/env bash
+myName="Zack Liston"
+yourName="John Doe"
+
+# Note that the spacing here is important
+if [[ $myName = $yourName ]]
+  then echo "You're the same!"
+elif [[ "Zack Liston" = $myName ]]
+  then echo "Hello $myName"
+else 
+  echo "Something else"
+fi
+
+exit 0
+```
+####
