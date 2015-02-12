@@ -132,8 +132,8 @@ Hello World
 **On space charaters and double quotes**
 It is generally advised to use double quotes very liberally. They will help us avoid common problems with parameter separation and expansion.
 
-###If, while, for
-####If-then-else 
+###Conditionals
+#####Conditional Blocks 
 ```bash
 #!/usr/bin/env bash
 myName="Zack Liston"
@@ -150,4 +150,70 @@ fi
 
 exit 0
 ```
-####
+
+#####Conditional Loops
+######While
+```bash
+#!/usr/bin/env bash
+while true
+do echo "Infinite loop
+done
+```
+
+######For
+```bash
+#!/usr/bin/env bash
+
+for (( i=10; i > 0; i-- ))
+  do echo "Loop one number is $i"
+done
+
+for i in 10 9 8 7 6 5 4 3 2 1
+  do echo "Loop two number is $i"
+done
+
+for i in {10..1}
+  do echo "Loop three number is $i"
+done
+exit 0
+```
+
+###Parameters
+Parameters can be accessed individually like so 
+```
+$ script param1 param2 param3 param4
+# $1 is "param1"
+# $2 is "param2"
+# etc, if there are more than 9 parameters the 9+n parameters must be accessed like so ${10} 
+# Otherwise if accessed like this $10 it will subsitite $1 for the first parameter and append 0
+```
+
+Parameters can be accessed as a group like so 
+```
+$ script param1 param2 param3 param4
+# $@ is a collection of all the parameters. We usually want to surrond it in double quotes to 
+# promote space safety. 
+```
+
+We can also get the number of parameters
+```
+$ script param1 param2 param3 param4
+# $# is the number of parameters, in this case 4
+```
+
+###File descriptors/redirection
+####File Descriptors
+Bash has three open file descriptors by default
+* Standard Input - File Descriptor 0
+* Standard Output - File Descriptor 1
+* Standard Error - File Descriptor 2
+
+######Standard Input
+By default is connected to the keyboard.
+
+######Standard Output
+By default is connected to the screen. This is the actual result of a program
+
+######Standard Error
+By default is connected to the screen. This includes all messages, not just errors. 
+
