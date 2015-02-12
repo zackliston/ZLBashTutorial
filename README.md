@@ -293,3 +293,40 @@ $ grep -i "print" *.c | grep -v "printable"
 
 ######Regular Expressions
 We can grep either by string, or a regular expression. 
+
+####Awk
+Awk is used to select which output we want and discard the rest. Awk is a language and itself, and can be highly customized. We use the basic format:
+
+```
+$ awk '{<action>}' <inputfile(s)>
+
+# or using the output of another program
+
+$ <otherprogram> | awk '{<action>}'
+```
+
+For example, if we want the permissions of all the files in the directory (the permissions are the first field) we can pipe `ls` to `awk`
+
+```
+$ ls -l | awk '{print $1}' 
+```
+
+The action of `awk` is wide open, allowing us to do nearly anything. One simple example is reversing all of the words in each line:
+
+```
+$ awk '{
+  for (i=NF; i>0; i--) {
+    printf "%s ", $i;
+  }
+  printf "\n"
+}' <inputfile> 
+```
+NF is a variable containing the number of fields. Note that within `awk` we do not need the $ before NF to access it. $NF refers to the last field. 
+<br>
+
+Another example. Suppose we want to get aggregate size of all the files in a directory, we can use awk. 
+
+```
+# We know that the first field of ls -l contains the size of the file
+$ ls -l | awk '{sum += $5} END {print sum}'
+```
