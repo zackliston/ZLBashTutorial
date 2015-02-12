@@ -245,3 +245,51 @@ Note that the `>` creates a new file or overwrites the existing one. If we want 
 $ ls >> files.txt
 # appends the output to files.txt instead of replacing it. 
 ```
+
+####Pipes
+One of the most important capabilities of bash is being able to send the output of one script to the input of another. We can do this using pipes. For example, if we want to get any file/directory in the current directory that matches "Desktop":
+
+```
+$ ls -l | grep "Desktop"
+```
+
+This feature is the glue of bash. It allows us to string together many small programs to get the result we want, which is what bash is in a nutshell. 
+<br> 
+Sometimes we may want to send the output to another program, but also save it. We can do that using the `tee` command. 
+
+```
+$ ls -l | tee files.txt | grep "Desktop" > result.txt
+# This first gets all the files in the directory, then saves it it files.txt, then sends
+# it to grep, which finds which ones have "Desktop" and save those to result.txt
+```
+
+###Basic Tools
+####Grep
+Grep is a very powerful tool for searching. This is its most basic format, it returns the filename and the line that matches the expression
+```
+$ grep <expression> <files to search>
+
+# to find all C files in the current directory that have the term "print"
+
+$ grep "print" *.c
+```
+
+To get just the names of the files matching the expression provide the `-l` option
+
+```
+$ grep -l "print" *.c
+```
+
+To ignore the case provide the `-i` option
+```
+$ grep -i "print" *.c
+```
+
+To filter out results you don't want to see provide the `-v` option. For example, we want to see what files contain `print` but not `printable`. Not that we must pipe this to another grep. 
+
+```
+$ grep -i "print" *.c | grep -v "printable"
+```
+
+######Regular Expressions
+We can grep either by string, or a regular expression. 
