@@ -1,6 +1,7 @@
 # ZLBashExample
 
-###Creating Bash Scripts
+###Getting started
+####Creating bash scripts
 First, create a file using your favorite text editor
 ```
 $ vim testscript
@@ -60,3 +61,70 @@ Now when you type
 $ testscript
 ```
 into your terminal, it will search through all the directories in $PATH, find your script, and run it.
+
+###Basic Syntax
+####Variables
+#####Setting/Getting
+```bash
+#!/usr/bin/env bash
+# Variables can be set like this
+myVar="Hello world"
+
+# And expanded like this 
+echo $myVar
+
+# prints "Hello world"
+
+exit 0
+```
+
+#####Expansion
+Variables not inside of quotes will be expanded 
+```bash
+$ echo This is my variable $myVar
+# prints This is my variable Hello world
+```
+
+Variables inside single quotes will not be expanded
+```bash
+$ echo 'This is my variable $myVar
+# prints This is my variable $myVar
+```
+
+Variables inside double quotes will be expanded
+```bash
+$ echo "This is my variable $myVar"
+# prints This is my variable Hello World
+```
+
+####Space Characters
+Spaces are very important in bash - my act as delimiters. For example, if you try to set a variable like this:
+```
+$ aVar = "Hello"
+# prints -bash: myvar: command not found
+```
+Bash assumed that `aVar` was a script you wanted to run, with `=` and `"Hello"` as arguments. This is because it uses space charaters to separate commands. Instead, use:
+```
+# aVar="Hello"
+```
+
+######Parameter Separation
+We have a [function called print](https://github.com/zackliston/ZLBashExample/tree/master/Examples) that prints each parameter on it's own line. Assume we want to print the word "Hello"
+
+```bash
+$ print Hello
+Hello
+```
+Good, that works. Now let's print "Hello World"
+
+```bash
+$ print Hello World
+Hello
+World
+```
+That doesn't seem right, Hello World should be one the same line - or should it. This program prints each parameter on it's own line, and since space characters are the delimiters between paramters it thinks that "Hello" and "World" are two separate paramters. So how do we fix this - we simply use double quotes
+
+```bash
+$ print "Hello World"
+Hello World
+```
